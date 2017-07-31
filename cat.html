@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Cat - Alpha by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<div id="page-wrapper"> <!-- Header -->
+				<header id="header">
+					<h1><a href="index.html">Cat & Dog</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#" class="icon fa-angle-down">Menu</a>
+							  <ul>
+									<li><a href="cat.html">Cat by States</a></li>
+									<li><a href="dog.html">Dog by States</a></li>
+									<li><a href="map.html">Pet Preferences</a></li>
+									<li>
+										<a href="#">More Maps</a>
+										<ul>
+											<li><a href="map_election.html">Pet & Election</a></li>
+											<li><a href="map_income.html">Pet & Income</a></li>
+											<li><a href="map_ob.html">Pet & Obesity</a></li>
+										</ul>
+									</li>
+									<li><a href="about.html">About</a></li>
+							 </ul>
+							</li>
+							<li></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+					  <h2>Cat Owning Household by State</h2>
+</header>
+					<div class="box">
+						<span class="image featured">
+<svg width="864" height="720"></svg>
+						</span>
+						<h3>This is a subheading</h3>
+						<p>Cep risus aliquam gravida cep ut lacus amet. Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae ante vestibulum ante. Blandit. Ante accumsan nisi eu placerat gravida placerat adipiscing in risus fusce vitae ac mi accumsan nunc in accumsan tempor blandit aliquet aliquet lobortis. Ultricies blandit lobortis praesent turpis. Adipiscing accumsan adipiscing adipiscing ac lacinia cep. Orci blandit a iaculis adipiscing ac. Vivamus ornare laoreet odio vis praesent nunc lorem mi. Erat. Tempus sem faucibus ac id. Vis in blandit. Nascetur ultricies blandit ac. Arcu aliquam. Accumsan mi eget adipiscing nulla. Non vestibulum ac interdum condimentum semper commodo massa arcu.</p>
+						
+						<ul class="actions"><center>
+										<li><a href="index.html" class="button">Back</a></li>
+										<li><a href="dog.html" class="button">Next</a></li>
+									</center></ul>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				
+				<footer id="footer">
+<ul class="copyright">
+  <li>&copy; Jiehuan Huang. All rights reserved.</li>
+  <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+	
+	
+	<meta charset="utf-8">
+	<style>
+	.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 2px;
+	}
+
+	div.tooltip {
+	  position: absolute;
+	  text-align: center;
+	  padding: 2px;
+	  font: 14px sans-serif;
+	  background: lightsteelblue;
+	  border: 6px;
+	  border-radius: 8px;
+	  pointer-events: none;
+	}
+    </style>
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script>
+
+
+
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 20, bottom: 40, left: 100},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+
+var y = d3.scaleBand().rangeRound([0, height]).padding(0.1),
+    x = d3.scaleLinear().rangeRound([0, width]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+var cat_color = d3.scaleSequential(d3.interpolateBlues);
+
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+	
+d3.csv("data.csv", function(d) {
+	  return d;
+	}, function(error, data) {
+	  if (error) throw error;
+
+  y.domain(data.map(function(d) { return d.state; }));
+  x.domain([0, d3.max(data, function(d) { return d.cat; })]);
+  cat_color.domain(d3.extent(data, function(d){return d.cat;}));
+  
+  g.selectAll("rect")
+    .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("y", function(d) { return y(d.state); })
+      .attr("height", y.bandwidth())
+      .attr("width", function(d) { return x(d.cat); })
+	  .style("fill", function(d){return cat_color(d.cat*0.8+10)})
+      .on("mouseover", function(d) {
+        div.transition()
+          .duration(200)
+          .style("opacity", .9);
+        div.html(d.state + "<br/>" + "Cat Onwer: " + d.cat + "%")
+          .style("left", (d3.event.pageX+10) + "px")
+          .style("top", (d3.event.pageY -28) + "px");
+        })
+      .on("mouseout", function(d) {
+        div.transition()
+          .duration(500)
+          .style("opacity", 0);
+        })
+	  .on("click", function(d) {
+        div.transition()
+          .duration(200)
+          .style("opacity", .9);
+        div.html(d.state + "<br/>" + "Households: " + d.household + "K" + "<br/>" + "Cat Population: " + d.cat_pop + "K" + "<br/>" + "Cat Onwer: " + d.cat + "%" + "<br/>" + "Avg. " + d.cat_mean + " cats for every cat owner")
+          .style("left", (d3.event.pageX+10) + "px")
+          .style("top", (d3.event.pageY -28) + "px");
+	  });
+	  
+    g.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+		
+  	g.append("text")             
+        .attr("transform",
+              "translate(" + (width/2) + " ," + 
+                             (height + margin.top +15) + ")")
+        .style("text-anchor", "middle")
+        .text("Cat Owner %");
+
+    g.append("g")
+        .call(d3.axisLeft(y));
+		    
+		
+	
+
+});
+
+</script>
+</html>

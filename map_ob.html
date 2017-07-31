@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Pet & Obesity - Alpha by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<div id="page-wrapper"> <!-- Header -->
+				<header id="header">
+					<h1><a href="index.html">Cat & Dog</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#" class="icon fa-angle-down">Menu</a>
+							  <ul>
+									<li><a href="cat.html">Cat by States</a></li>
+									<li><a href="dog.html">Dog by States</a></li>
+									<li><a href="map.html">Pet on Map</a></li>
+									<li>
+										<a href="#">More Maps</a>
+										<ul>
+											<li><a href="map_election.html">Pet & Election</a></li>
+											<li><a href="map_income.html">Pet & Income</a></li>
+											<li><a href="map_ob.html">Pet & Obesity</a></li>
+										</ul>
+									</li>
+									<li><a href="about.html">About</a></li>
+								</ul>
+							</li>
+							<li></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+					  <h2>Pet Preference and Obesity rate</h2>
+					  <p>A generic page for every non-generic situation.</p>
+					</header>
+					<div class="box">
+
+						
+					  <h3>This is a subheading</h3>
+						<center> <svg width="960" height="600" id="statesvg"></svg> </center>
+
+						<h3>This is a subheading</h3>
+						
+						
+						<center><svg width="960" height="600" id="statesvg2"></svg> </center>
+						<p>Cep risus aliquam gravida cep ut lacus amet. Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae ante vestibulum ante. Blandit. Ante accumsan nisi eu placerat gravida placerat adipiscing in risus fusce vitae ac mi accumsan nunc in accumsan tempor blandit aliquet aliquet lobortis. Ultricies blandit lobortis praesent turpis. Adipiscing accumsan adipiscing adipiscing ac lacinia cep. Orci blandit a iaculis adipiscing ac. Vivamus ornare laoreet odio vis praesent nunc lorem mi. Erat. Tempus sem faucibus ac id. Vis in blandit. Nascetur ultricies blandit ac. Arcu aliquam. Accumsan mi eget adipiscing nulla. Non vestibulum ac interdum condimentum semper commodo massa arcu.</p>
+						
+						<ul class="actions"><center>
+										<li><a href="map_election.html" class="button special">Pet and Election</a></li>
+										<li><a href="map_income.html" class="button special">Pet and Income</a></li>
+									</center></ul>
+									
+						<ul class="actions"><center>
+										<li><a href="index.html" class="button">Home</a></li>
+									</center></ul>
+						
+					</div>
+				</section>
+
+			<!-- Footer -->
+				
+				<footer id="footer">
+<ul class="copyright">
+	  <li>&copy; Jiehuan Huang. All rights reserved.</li>
+					  <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+		
+<meta charset="utf-8">
+<style>
+	.state{
+		fill: none;
+		stroke: #a9a9a9;
+		stroke-width: 1;
+	}
+	.state:hover{
+		fill-opacity:0.5;
+	}
+	
+	#tooltip h4{
+		margin:0;
+		font-size:14px;
+	}
+	#tooltip{
+		position: absolute;           
+		text-align: center;
+		margin: 10px;
+		font: 12px sans-serif;        
+		border: 1px;      
+		border-radius: 2px;           
+		pointer-events: none;         
+		background:rgba(0,0,0,0.9);
+		border:1px solid grey;
+		border-radius:5px;
+		font-size:12px;
+		width:auto;
+		padding:4px;
+		color:white;
+		opacity:0;
+	}
+	#tooltip table{
+		table-layout:auto;
+	}
+	#tooltip tr td{
+		padding:0;
+		margin:0;
+	}
+	#tooltip tr td:nth-child(1){
+		width:auto;
+	}
+	#tooltip tr td:nth-child(2){
+		text-align:center;
+	}
+</style>
+<body>
+<div id="tooltip"></div>
+<script src="uStates.js"></script> 
+<script src="http://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+	function tooltip3Html(n, d){	
+		return "<tr><td>"+n+"</td></tr>" + "<br/>"+
+			"<tr><td>Cat Owner: </td><td>"+(d.cat)+"%</td></tr>"+ "<br/>" +
+			"<tr><td>Dog Owner: </td><td>"+(d.dog)+"%</td></tr>"+ "<br/>" +
+		"<tr><td>Preference of Dog: </td><td>"+(d.ratio)+"</td></tr>";
+	}
+	
+	function tooltip2Html(n, d){	
+		return "<tr><td>"+n+"</td></tr>" + "<br/>"+
+			"<tr><td>Household: </td><td>"+(d.household)+"K</td></tr>"+"<br/>" +
+			"<tr><td>Cat/Dog Owner: </td><td>"+(d.pet)+"%</td></tr>"+"<br/>" +
+			"<tr><td>Cat Population: </td><td>"+(d.cat_pop)+"K</td></tr>"+"<br/>" +
+			"<tr><td>Dog Population: </td><td>"+(d.dog_pop)+"K</td></tr>"+"<br/>" +
+			"<tr><td>Cat Owner: </td><td>"+(d.cat)+"%</td></tr>"+"<br/>" +
+			"<tr><td>Dog Owner: </td><td>"+(d.dog)+"%</td></tr>"+"<br/>" +
+			"<tr><td>Avg. cats for every cat owner: </td><td>"+(d.cat_mean)+"</td></tr>"+"<br/>" +
+			"<tr><td>Avg. dogs for every dog owner: </td><td>"+(d.dog_mean)+"</td></tr>"+"<br/>" +
+			"<tr><td>Preference of Dog: </td><td>"+(d.ratio)+"</td></tr>";
+	}
+	
+	d3.csv("data.csv", function(d) {
+		return d;
+	},
+		function(error, dataset) {
+		  if (error) throw error;
+		   
+	 	var data ={};	
+	 	["FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+	 	"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
+	 	"MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
+	 	"CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
+	 	"WI", "MO", "AR", "OK", "KS", "LA", "VA"]
+	 		.forEach(function(d){
+				var color = d3.scaleLinear()
+			    	.domain([0.692, 1.187, 1.609])
+			    	.range(["blue", "lightgrey", "red"]);
+	 			
+				for (var i = 0; i < 49; i++)
+	 			{
+	 				if (d == dataset[i].id)
+	 				data[d]={cat: dataset[i].cat, dog: dataset[i].dog, household: dataset[i].household, pet: dataset[i].pet, cat_mean: dataset[i].cat_mean, dog_mean: dataset[i].dog_mean, cat_pop: dataset[i].cat_pop, dog_pop: dataset[i].dog_pop,
+						ratio: Math.round(dataset[i].ratio *100)/100, color: color(dataset[i].ratio)};
+	 			}
+	 				
+			 
+	 		});
+
+	 	uStates.draw("#statesvg", data, tooltip3Html, tooltip2Html);
+	
+	 	d3.select(self.frameElement).style("height", "600px"); 
+
+	});
+	
+	
+</script>
+
+<script>
+	
+	var svg = d3.select("#statesvg");
+	legend = svg.append("rect")
+	.attr("x", 850)
+	.attr("y", 400)
+	.attr("height", 20)
+	.attr("width", 20)
+	.style("fill", "red");
+	
+	legend = svg.append("text")
+	.attr("x", 880)
+	.attr("y", 415)
+	.text("Dog");
+	
+	legend = svg.append("rect")
+	.attr("x", 850)
+	.attr("y", 430)
+	.attr("height", 20)
+	.attr("width", 20)
+	.style("fill", "blue");
+	
+	legend = svg.append("text")
+	.attr("x", 880)
+	.attr("y", 445)
+	.text("Cat");
+	
+</script>	
+
+<script>
+
+	function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
+		return "<tr><td>"+n+"</td></tr>" + "<br/>"+
+			"<tr><td>Obesity: </td><td>"+(d.ob)+"%</td></tr>"+ "<br/>";	}
+	
+	d3.csv("ob.csv", function(d) {
+		return d;
+	},
+		function(error, dataset) {
+		  if (error) throw error;
+		   
+	 	var data ={};	
+	 	["FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+	 	"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
+	 	"MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
+	 	"CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
+	 	"WI", "MO", "AR", "OK", "KS", "LA", "VA"]
+	 		.forEach(function(d){
+				var color = d3.scaleLinear()
+			    	.domain([46.3, 58.39, 72.3])
+			    	.range(["blue", "lightgrey", "red"]);
+	 			
+				for (var i = 0; i < 49; i++)
+	 			{
+	 				if (d == dataset[i].id)
+	 				data[d]={ob: dataset[i].ob, color: color(dataset[i].ob)};
+	 			}
+	 				
+			 
+	 		});
+
+	 	uStates.draw("#statesvg2", data, tooltipHtml);
+	
+	 	d3.select(self.frameElement).style("height", "600px"); 
+
+	});
+	
+	
+</script>
+
+<script>
+	
+	var svg = d3.select("#statesvg2");
+	legend = svg.append("rect")
+	.attr("x", 800)
+	.attr("y", 400)
+	.attr("height", 20)
+	.attr("width", 20)
+	.style("fill", "red");
+	
+	legend = svg.append("text")
+	.attr("x", 830)
+	.attr("y", 415)
+	.text("High Obesity");
+	
+	legend = svg.append("rect")
+	.attr("x", 800)
+	.attr("y", 430)
+	.attr("height", 20)
+	.attr("width", 20)
+	.style("fill", "blue");
+	
+	legend = svg.append("text")
+	.attr("x", 830)
+	.attr("y", 445)
+	.text("Low Obesity");
+	
+</script>	
+
+</html>
