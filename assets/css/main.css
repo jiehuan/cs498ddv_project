@@ -65,8 +65,8 @@
 
 	.container.\31 25\25 {
 		width: 100%;
-		max-width: 75em;
-		min-width: 65em;
+		max-width: 80em;
+		min-width: 70em;
 	}
 
 	.container.\37 5\25 {
@@ -82,15 +82,15 @@
 	}
 
 	.container {
-		width: 65em;
+		width: 70em;
 	}
 
 	@media screen and (max-width: 1680px) {
 
 		.container.\31 25\25 {
 			width: 100%;
-			max-width: 75em;
-			min-width: 65em;
+			max-width: 80em;
+			min-width: 70em;
 		}
 
 		.container.\37 5\25 {
@@ -106,7 +106,7 @@
 		}
 
 		.container {
-			width: 65em;
+			width: 70em;
 		}
 
 	}
@@ -115,8 +115,8 @@
 
 		.container.\31 25\25 {
 			width: 100%;
-			max-width: 75em;
-			min-width: 65em;
+			max-width: 80em;
+			min-width: 70em;
 		}
 
 		.container.\37 5\25 {
@@ -132,7 +132,7 @@
 		}
 
 		.container {
-			width: 65em;
+			width: 70em;
 		}
 
 	}
