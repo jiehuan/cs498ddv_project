@@ -25,19 +25,16 @@
 									<li><a href="cat.html">Cat by States</a></li>
 									<li><a href="dog.html">Dog by States</a></li>
 									<li><a href="map.html">Pet on Map</a></li>
-										<li>
+									<li>
 										<a href="#">More Maps</a>
 										<ul>
 											<li><a href="map_election.html">Pet & Election</a></li>
 											<li><a href="map_income.html">Pet & Income</a></li>
 											<li><a href="map_ob.html">Pet & Obesity</a></li>
 										</ul>
+										<li><a href="about.html">About</a></li>
 									</li>
-									
-									
 								</ul>
-								
-							<li><a href="about.html">About</a></li>
 							</li>
 							<li></li>
 						</ul>
@@ -236,6 +233,8 @@
 			"<tr><td>Clinton: </td><td>"+(d.clinton)+"%</td></tr>"+ "<br/>" +
 			"<tr><td>Trump: </td><td>"+(d.trump)+"%</td></tr>"+ "<br/>";
 	}
+	
+	
 	
 	d3.csv("election.csv", function(d) {
 		return d;
