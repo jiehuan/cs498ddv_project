@@ -234,6 +234,12 @@
 			"<tr><td>Trump: </td><td>"+(d.trump)+"%</td></tr>"+ "<br/>";
 	}
 	
+	function tooltipHtml4(n, d){	/* function to create html content string in tooltip div. */
+		return "<tr><td>"+n+"</td></tr>" + "<br/>"+
+			"<tr><td>Clinton: </td><td>"+(d.clinton)+"%</td></tr>"+ "<br/>" +
+			"<tr><td>Trump: </td><td>"+(d.trump)+"%</td></tr>"+ "<br/>";
+	}
+	
 	d3.csv("election.csv", function(d) {
 		return d;
 	},
@@ -261,7 +267,7 @@
 			 
 	 		});
 
-	 	uStates.draw("#statesvg2", data, tooltipHtml);
+	 	uStates.draw("#statesvg2", data, tooltipHtml, tooltipHtml4);
 	
 	 	d3.select(self.frameElement).style("height", "600px"); 
 
